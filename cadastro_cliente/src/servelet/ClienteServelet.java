@@ -22,6 +22,15 @@ public class ClienteServelet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		Long id = Long.parseLong(request.getParameter("id"));
+		String acao = request.getParameter("acao");
+		
+		if (acao.equalsIgnoreCase("excluir")) {
+			clientedao.delete(id);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
+			request.setAttribute("clientes", clientedao.listAll());
+			dispatcher.forward(request, response);
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
