@@ -35,8 +35,11 @@ public class ClienteServelet extends HttpServlet {
 		cliente.setEmail(email);
 		cliente.setSenha(senha);
 		
+		System.out.println(cliente.toString());
+		
 		clientedao.create(cliente);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroCliente.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
+		request.setAttribute("clientes", clientedao.listAll());
 		dispatcher.forward(request, response);
 		
 		

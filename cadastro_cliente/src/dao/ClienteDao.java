@@ -65,5 +65,19 @@ public class ClienteDao {
 			e.printStackTrace();
 		}
 	}
+	
+	public void delete(Long id) {
+		this.sql = "DELETE FROM cliente WHERE id = ?";
+		
+		try {
+			PreparedStatement delete = conexao.prepareStatement(this.sql);
+			delete.setLong(1, id);
+			delete.execute();
+			conexao.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 
 }
