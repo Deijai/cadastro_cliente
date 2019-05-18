@@ -95,8 +95,20 @@ public class ClienteDao {
 	}
 	
 	//editar cliente
-	public void update(ClienteBean cliente) {
+	public void update(ClienteBean cliente, Long id) {
+		this.sql = "UPDATE cliente SET nome = ?, email = ?, senha = ? WHERE id = ?";
 		
+		try {
+			PreparedStatement update = conexao.prepareStatement(this.sql);
+			update.setString(1, cliente.getNome());
+			update.setString(2, cliente.getEmail());
+			update.setString(3, cliente.getSenha());
+			update.setLong(4, id);
+			update.execute();
+			conexao.commit();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
