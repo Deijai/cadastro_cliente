@@ -1,6 +1,8 @@
 package servelet;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,10 +10,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import beans.ClienteBean;
+import dao.ClienteDao;
 
 @WebServlet("/ClienteServelet")
 public class ClienteServelet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	private ClienteDao clientedao = new ClienteDao();
 
     public ClienteServelet() {
         super();
@@ -30,6 +34,10 @@ public class ClienteServelet extends HttpServlet {
 		cliente.setNome(nome);
 		cliente.setEmail(email);
 		cliente.setSenha(senha);
+		
+		clientedao.create(cliente);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/cadastroCliente.jsp");
+		dispatcher.forward(request, response);
 		
 		
 		

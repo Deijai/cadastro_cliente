@@ -18,7 +18,7 @@
 			<label>Email:</label>
 			<input type="text" name="email">
 			<br>
-			<label>Nome:</label>
+			<label>Senha:</label>
 			<input type="password" name="senha">
 			<br>
 			<input type="submit" value="Salvar">
