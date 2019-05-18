@@ -31,6 +31,14 @@ public class ClienteServelet extends HttpServlet {
 			request.setAttribute("clientes", clientedao.listAll());
 			dispatcher.forward(request, response);
 		}
+		
+		if (acao.equalsIgnoreCase("editar")) {
+			ClienteBean cliente = clientedao.listOne(id);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
+			request.setAttribute("cliente", cliente);
+			dispatcher.forward(request, response);
+			
+		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

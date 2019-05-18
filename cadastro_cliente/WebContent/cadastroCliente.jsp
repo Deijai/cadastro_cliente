@@ -12,14 +12,16 @@
  	<h1>Cadastro de Cliente</h1>
 
 		<form action="ClienteServelet" method="post">
+			<input type="text" readonly="readonly" name="nome" value="${cliente.id }">
+			<br>
 			<label>Nome:</label>
-			<input type="text" name="nome">
+			<input type="text" name="nome" value="${cliente.nome }">
 			<br>
 			<label>Email:</label>
-			<input type="text" name="email">
+			<input type="text" name="email" value="${cliente.email }">
 			<br>
 			<label>Senha:</label>
-			<input type="password" name="senha">
+			<input type="password" name="senha" value="${cliente.senha }">
 			<br>
 			<input type="submit" value="Salvar">
 		</form>

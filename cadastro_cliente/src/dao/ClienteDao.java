@@ -49,6 +49,34 @@ public class ClienteDao {
 		return list;
 	}
 	
+	
+	//listar um cliente
+	public ClienteBean listOne(Long id) {
+		this.sql = "SELECT * FROM cliente WHERE id = ?";
+		
+		try {
+			PreparedStatement select = conexao.prepareStatement(this.sql);
+			select.setLong(1, id);
+			
+			ResultSet res = select.executeQuery();
+			
+			if (res.next()) {
+				ClienteBean cliente = new ClienteBean();
+				cliente.setId(res.getLong("id"));
+				cliente.setNome(res.getString("nome"));
+				cliente.setEmail(res.getString("email"));
+				cliente.setSenha(res.getString("senha"));
+				
+				return cliente;
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	//cadastrar cliente
 	public void create(ClienteBean cliente) {
 		this.sql = "INSERT INTO cliente (nome, email, senha) VALUES (?,?,?)";
