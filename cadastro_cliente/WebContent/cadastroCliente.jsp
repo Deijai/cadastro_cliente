@@ -11,7 +11,7 @@
 
  	<h1>Cadastro de Cliente</h1>
 
-		<form action="">
+		<form action="ClienteServelet" method="post">
 			<label>Nome:</label>
 			<input type="text" name="nome">
 			<br>

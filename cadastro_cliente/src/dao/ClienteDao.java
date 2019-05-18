@@ -21,7 +21,6 @@ public class ClienteDao {
 	}
 	
 	//listar todos os clientes
-	
 	public List<ClienteBean> listAll(){
 		List<ClienteBean> list = new ArrayList<ClienteBean>();
 		
@@ -48,6 +47,23 @@ public class ClienteDao {
 		}
 		
 		return list;
+	}
+	
+	//cadastrar cliente
+	public void create(ClienteBean cliente) {
+		this.sql = "INSERT INTO cliente (nome, email, senha) VALUES (?,?,?)";
+		
+		try {
+			PreparedStatement create = conexao.prepareStatement(this.sql);
+			create.setString(1, cliente.getNome());
+			create.setString(2, cliente.getEmail());
+			create.setString(3, cliente.getSenha());
+			create.execute();
+			conexao.commit();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 }
