@@ -43,7 +43,7 @@ public class ClienteServelet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ClienteBean cliente = new ClienteBean();
-		
+		Long id = Long.parseLong(request.getParameter("id"));
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
@@ -54,10 +54,16 @@ public class ClienteServelet extends HttpServlet {
 		
 		System.out.println(cliente.toString());
 		
-		clientedao.create(cliente);
-		RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
-		request.setAttribute("clientes", clientedao.listAll());
-		dispatcher.forward(request, response);
+		if (id != null) {
+			
+		} else {
+			clientedao.create(cliente);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
+			request.setAttribute("clientes", clientedao.listAll());
+			dispatcher.forward(request, response);
+		}
+		
+		
 		
 		
 		

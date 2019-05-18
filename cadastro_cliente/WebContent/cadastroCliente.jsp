@@ -12,7 +12,7 @@
  	<h1>Cadastro de Cliente</h1>
 
 		<form action="ClienteServelet" method="post">
-			<input type="text" readonly="readonly" name="nome" value="${cliente.id }">
+			<input type="text" readonly="readonly" name="id" value="${cliente.id }">
 			<br>
 			<label>Nome:</label>
 			<input type="text" name="nome" value="${cliente.nome }">
