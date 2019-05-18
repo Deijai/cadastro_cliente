@@ -43,7 +43,7 @@ public class ClienteServelet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		ClienteBean cliente = new ClienteBean();
-		Long id = Long.parseLong(request.getParameter("id"));
+		String id = request.getParameter("id");
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
@@ -54,9 +54,9 @@ public class ClienteServelet extends HttpServlet {
 		
 		System.out.println(cliente.toString());
 		
-		if (id != null) {
+		if (id.isEmpty() == false) {
 			System.out.println("id no if === "+id);
-			clientedao.update(cliente, id);
+			clientedao.update(cliente, Long.parseLong(id));
 			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
 			request.setAttribute("clientes", clientedao.listAll());
 			dispatcher.forward(request, response);
