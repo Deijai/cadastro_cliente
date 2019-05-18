@@ -56,6 +56,10 @@ public class ClienteServelet extends HttpServlet {
 		
 		if (id != null) {
 			System.out.println("id no if === "+id);
+			clientedao.update(cliente, id);
+			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
+			request.setAttribute("clientes", clientedao.listAll());
+			dispatcher.forward(request, response);
 		} else {
 			System.out.println("id no else === "+id);
 			clientedao.create(cliente);
