@@ -94,6 +94,13 @@ public class ClienteDao {
 		}
 	}
 	
+	//editar cliente
+	public void update(ClienteBean cliente) {
+		
+	}
+	
+	
+	//deletar cliente
 	public void delete(Long id) {
 		this.sql = "DELETE FROM cliente WHERE id = ?";
 		
