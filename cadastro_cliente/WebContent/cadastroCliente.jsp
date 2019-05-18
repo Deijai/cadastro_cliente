@@ -32,16 +32,6 @@
 		<br>
 		
 		<table border="1">
-		
-			   <tr>
-			    	<td><c:out value="ID"></c:out> </td>
-			    	<td><c:out value="NOME"></c:out> </td>
-			    	<td><c:out value="EMAIL"></c:out> </td>
-			    	<td><c:out value="SENHA"></c:out> </td>
-			    	<td>AÇÂO</td>
-			    	<td>AÇÂO</td>
-			    </tr>
-			    
 				<c:forEach items="${clientes}" var="cliente">
 					<tr>
 				    	<td><c:out value="${cliente.id }"></c:out> </td>
