@@ -6,43 +6,63 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Cadastro de Cliente</title>
+<link rel="stylesheet" href="css/cadastro.css">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
 
  	<h1>Cadastro de Cliente</h1>
 
 		<form action="ClienteServelet" method="post">
-			<input type="text" readonly="readonly" name="id" value="${cliente.id }">
+		 <ul class="form-style-1">
+			<input type="text" class="field-long" readonly="readonly" name="id" value="${cliente.id }">
 			<br>
 			<label>Nome:</label>
-			<input type="text" name="nome" value="${cliente.nome }">
+			<input type="text" class="field-long" name="nome" value="${cliente.nome }">
 			<br>
 			<label>Email:</label>
-			<input type="text" name="email" value="${cliente.email }">
+			<input type="text" class="field-long" name="email" value="${cliente.email }">
 			<br>
 			<label>Senha:</label>
-			<input type="password" name="senha" value="${cliente.senha }">
+			<input type="password" class="field-long" name="senha" value="${cliente.senha }">
 			<br>
-			<input type="submit" value="Salvar">
+			<br>
+			<br>
+			<li><input type="submit" value="Salvar"></li>
+		</ul>
 		</form>
 		
-		<br>
-		<br>
-		<br>
-		<br>
 		
-		<table border="1">
-				<c:forEach items="${clientes}" var="cliente">
-					<tr>
-				    	<td><c:out value="${cliente.id }"></c:out> </td>
+		<div class="container">
+					
+				<table class="table" width="50%">
+					  <thead class="thead-dark">
+					    <tr>
+					      <th scope="col">#</th>
+					      <th scope="col">Nome</th>
+					      <th scope="col">Email</th>
+					      <th scope="col">Senha</th>
+					      <th scope="col">Ação</th>
+					      <th scope="col">Ação</th>
+					    </tr>
+					  </thead>
+					  <tbody>
+					  <c:forEach items="${clientes}" var="cliente">
+					    <tr>
+					    <td scope="row"><c:out value="${cliente.id }"></c:out> </td>
 				    	<td><c:out value="${cliente.nome }"></c:out> </td>
 				    	<td><c:out value="${cliente.email }"></c:out> </td>
 				    	<td><c:out value="${cliente.senha }"></c:out> </td>
 				    	<td><a href="ClienteServelet?acao=excluir&id=${cliente.id }">Excluir</a></td>
 				    	<td><a href="ClienteServelet?acao=editar&id=${cliente.id }">Editar</a></td>
-				    </tr>
-				</c:forEach>
-		</table>
+					    </tr>
+					   </c:forEach>
+					  </tbody>
+					</table>
+		</div>
+		<br>
+		<br>	
+		
 
 </body>
 </html>
