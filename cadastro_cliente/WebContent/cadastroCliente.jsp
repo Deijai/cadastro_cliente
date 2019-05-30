@@ -53,8 +53,8 @@
 				    	<td><c:out value="${cliente.nome }"></c:out> </td>
 				    	<td><c:out value="${cliente.email }"></c:out> </td>
 				    	<td><c:out value="${cliente.senha }"></c:out> </td>
-				    	<td><a href="ClienteServelet?acao=excluir&id=${cliente.id }">Excluir</a></td>
-				    	<td><a href="ClienteServelet?acao=editar&id=${cliente.id }">Editar</a></td>
+				    	<td><a href="ClienteServelet?acao=excluir&id=${cliente.id }"><img src="imagens/delete.png"/></a></td>
+				    	<td><a href="ClienteServelet?acao=editar&id=${cliente.id }"><img src="imagens/update.png"/></a></td>
 					    </tr>
 					   </c:forEach>
 					  </tbody>

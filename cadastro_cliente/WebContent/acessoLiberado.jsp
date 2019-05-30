@@ -14,7 +14,7 @@
 <br>
 
 
-<a href="/cadastro_cliente/cadastroCliente.jsp">Cadastro de Cliente</a>
+<a href="ClienteServelet?acao=listarClientes">Cadastro de Cliente</a>
 
 </body>
 </html>
