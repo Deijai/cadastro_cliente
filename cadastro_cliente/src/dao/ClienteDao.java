@@ -68,6 +68,7 @@ public class ClienteDao {
 				cliente.setNome(res.getString("nome"));
 				cliente.setEmail(res.getString("email"));
 				cliente.setSenha(res.getString("senha"));
+				cliente.setFone(res.getString("fone"));
 				
 				return cliente;
 			}
