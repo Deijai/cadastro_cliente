@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -36,6 +37,7 @@ public class ClienteDao {
 				cliente.setNome(res.getString("nome"));
 				cliente.setEmail(res.getString("email"));
 				cliente.setSenha(res.getString("senha"));
+				cliente.setFone(res.getString("fone"));
 				list.add(cliente);
 				
 			}
@@ -79,13 +81,14 @@ public class ClienteDao {
 	
 	//cadastrar cliente
 	public void create(ClienteBean cliente) {
-		this.sql = "INSERT INTO cliente (nome, email, senha) VALUES (?,?,?)";
+		this.sql = "INSERT INTO cliente (nome, email, senha, fone) VALUES (?,?,?,?)";
 		
 		try {
 			PreparedStatement create = conexao.prepareStatement(this.sql);
 			create.setString(1, cliente.getNome());
 			create.setString(2, cliente.getEmail());
 			create.setString(3, cliente.getSenha());
+			create.setString(4, cliente.getFone());
 			create.execute();
 			conexao.commit();
 			
@@ -96,14 +99,15 @@ public class ClienteDao {
 	
 	//editar cliente
 	public void update(ClienteBean cliente, Long id) {
-		this.sql = "UPDATE cliente SET nome = ?, email = ?, senha = ? WHERE id = ?";
+		this.sql = "UPDATE cliente SET nome = ?, email = ?, senha = ?, fone = ? WHERE id = ?";
 		
 		try {
 			PreparedStatement update = conexao.prepareStatement(this.sql);
 			update.setString(1, cliente.getNome());
 			update.setString(2, cliente.getEmail());
 			update.setString(3, cliente.getSenha());
-			update.setLong(4, id);
+			update.setString(4, cliente.getFone());
+			update.setLong(5, id);
 			update.execute();
 			conexao.commit();
 		} catch (Exception e) {
@@ -126,5 +130,24 @@ public class ClienteDao {
 			e.printStackTrace();
 		}
 	}
+	
+	//verificar se email ja existe
+	public boolean verificaEmail(String email) throws SQLException {
+		this.sql = "SELECT email FROM cliente WHERE email = ?";
+		
+
+			PreparedStatement verificaEmail = conexao.prepareStatement(this.sql);
+			verificaEmail.setString(1, email);
+			
+			ResultSet res = verificaEmail.executeQuery();
+			
+			if (res.next()) {
+				return true;
+			} else {
+				return false;
+			}
+
+	}
+	
 
 }

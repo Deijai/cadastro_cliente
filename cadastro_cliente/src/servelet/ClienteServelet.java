@@ -1,6 +1,7 @@
 package servelet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -22,8 +23,10 @@ public class ClienteServelet extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		Long id = Long.parseLong(request.getParameter("id"));
 		String acao = request.getParameter("acao");
+		System.out.println(acao);
 		
 		if (acao.equalsIgnoreCase("excluir")) {
 			clientedao.delete(id);
@@ -39,6 +42,7 @@ public class ClienteServelet extends HttpServlet {
 			dispatcher.forward(request, response);
 			
 		}
+
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -47,25 +51,44 @@ public class ClienteServelet extends HttpServlet {
 		String nome = request.getParameter("nome");
 		String email = request.getParameter("email");
 		String senha = request.getParameter("senha");
+		String fone = request.getParameter("fone");
 		
-		cliente.setNome(nome);
-		cliente.setEmail(email);
-		cliente.setSenha(senha);
-		
-		System.out.println(cliente.toString());
-		
-		if (id.isEmpty() == false) {
-			System.out.println("id no if === "+id);
-			clientedao.update(cliente, Long.parseLong(id));
-			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
-			request.setAttribute("clientes", clientedao.listAll());
-			dispatcher.forward(request, response);
-		} else {
-			System.out.println("id no else === "+id);
-			clientedao.create(cliente);
-			RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
-			request.setAttribute("clientes", clientedao.listAll());
-			dispatcher.forward(request, response);
+		try {
+			if(clientedao.verificaEmail(email) == false) {
+				cliente.setNome(nome);
+				cliente.setEmail(email);
+				cliente.setSenha(senha);
+				cliente.setFone(fone);
+				
+				System.out.println(cliente.toString());
+				
+				if (id.isEmpty() == false) {
+					System.out.println("id no if === "+id);
+					clientedao.update(cliente, Long.parseLong(id));
+					RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
+					request.setAttribute("clientes", clientedao.listAll());
+					dispatcher.forward(request, response);
+				} else {
+					System.out.println("id no else === "+id);
+					clientedao.create(cliente);
+					request.setAttribute("class", "alert alert-success");
+					request.setAttribute("msg", "Cliente cadastrado com sucesso!");
+					RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
+					request.setAttribute("clientes", clientedao.listAll());
+					dispatcher.forward(request, response);
+				}
+			} else {
+				request.setAttribute("class", "alert alert-danger");
+				request.setAttribute("msg", "email ja cadastrado!");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("cadastroCliente.jsp");
+				request.setAttribute("clientes", clientedao.listAll());
+				dispatcher.forward(request, response);
+				
+			}
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+		} catch (SQLException e) {
+			e.printStackTrace();
 		}
 		
 		

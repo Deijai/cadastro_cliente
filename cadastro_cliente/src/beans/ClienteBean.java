@@ -6,8 +6,17 @@ public class ClienteBean {
 	private String nome;
 	private String email;
 	private String senha;
+	private String fone;
 	
 	
+	
+	
+	public String getFone() {
+		return fone;
+	}
+	public void setFone(String fone) {
+		this.fone = fone;
+	}
 	public Long getId() {
 		return id;
 	}

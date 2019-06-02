@@ -12,6 +12,11 @@
 <body>
 
  	<h1>Cadastro de Cliente</h1>
+ 	
+ 	
+ 		<br><br>
+ 		
+ 		<h4 class="${class}">${msg}</h4>
 
 		<form action="ClienteServelet" method="post">
 		 <ul class="form-style-1">
@@ -26,9 +31,12 @@
 			<label>Senha:</label>
 			<input type="password" class="field-long" name="senha" value="${cliente.senha }">
 			<br>
+			<label>Telefone:</label>
+			<input type="text" class="field-long" name="fone" value="${cliente.fone }">
 			<br>
 			<br>
-			<li><input type="submit" value="Salvar"></li>
+			<br>
+			<li><input type="submit" value="Salvar"> <input type="submit" value="Limpar"></li>
 		</ul>
 		</form>
 		
@@ -42,6 +50,7 @@
 					      <th scope="col">Nome</th>
 					      <th scope="col">Email</th>
 					      <th scope="col">Senha</th>
+					      <th scope="col">Telefone</th>
 					      <th scope="col">Ação</th>
 					      <th scope="col">Ação</th>
 					    </tr>
@@ -53,6 +62,7 @@
 				    	<td><c:out value="${cliente.nome }"></c:out> </td>
 				    	<td><c:out value="${cliente.email }"></c:out> </td>
 				    	<td><c:out value="${cliente.senha }"></c:out> </td>
+				    	<td><c:out value="${cliente.fone }"></c:out> </td>
 				    	<td><a href="ClienteServelet?acao=excluir&id=${cliente.id }"><img src="imagens/delete.png"/></a></td>
 				    	<td><a href="ClienteServelet?acao=editar&id=${cliente.id }"><img src="imagens/update.png"/></a></td>
 					    </tr>

@@ -14,7 +14,7 @@
 <br>
 
 
-<a href="ClienteServelet?acao=listarClientes">Cadastro de Cliente</a>
+<a href="ListarCliente?acao=listar"><img src="imagens/usuario.png"/></a>
 
 </body>
 </html>
